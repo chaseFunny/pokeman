@@ -4,6 +4,7 @@ import { getCommonPokemonAction, getPokemonByIdAction, getPokemonDetailListActio
 import { PokemonList } from "@/components/PokemonList";
 import GoNextOrPreviousServer from "@/components/goNextOrPreviousServer";
 import TypeSelectorServer from "@/components/typeSelectServer";
+import Welcome from "@/components/welcome";
 import { DEFAULT_PAGE_LIMIT, DEFAULT_PAGE_OFFSET } from "@/constants";
 
 /** 服务端页面 */
@@ -23,9 +24,7 @@ export default async function PokemonPage({
       <div>{error.message}</div>
     );
   }
-
   const { data: typeData, error:typeError } = await getTypeListAction()
-   
   const { data: detailData, error: detailError } = await getPokemonDetailListAction(data?.results)
   const isType = type.filter(ele => !!ele).length > 0
   let commonData: number[] = []
@@ -47,6 +46,10 @@ export default async function PokemonPage({
   const total = isType ? commonData?.length : data?.count
   return (
     <div>
+      <Welcome />
+      <div className="my-4 text-center text-gray-400">
+        total count: {total}，current page: {page}
+      </div>
       <TypeSelectorServer page={page}  types={typeData}  selectedTypes={type} />
       {(detailData || typePokemonData) && <PokemonList pokemonList={renderData} />}
         <div className="flex justify-center">
