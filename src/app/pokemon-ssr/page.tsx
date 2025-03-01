@@ -55,6 +55,7 @@ export default async function PokemonPage({
         <div className="flex justify-center">
         <GoNextOrPreviousServer page={page}  total={renderData?.length ?? 0} type={type}  />
       </div>
+      {typeError?.message && <div>{typeError.message}</div>}
       {error?.message && <div>{error.message}</div>}
       {detailError?.message && <div>{detailError.message}</div>}
       {typePokemonError?.message && <div>{typePokemonError.message}</div>}
