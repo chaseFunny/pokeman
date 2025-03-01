@@ -29,3 +29,8 @@ pnpm dlx shadcn@latest add button
 3）初始化布局和网站元信息
 
 利用 AI 初始化 layout 
+
+4）客户端页面开发
+
+优化：
+- 如果 gif 图片没有办法展示，使用 png 作为兜底

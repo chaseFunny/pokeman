@@ -22,7 +22,7 @@ export default function useData() {
   const getData = async (limit?: number, offset?: number) => {
     try {
       setLoading(true);
-      const res = await getPokemonList(limit, page? page * DEFAULT_PAGE_LIMIT : offset);
+      const res = await getPokemonList(limit, page > 1 ? (page - 1) * DEFAULT_PAGE_LIMIT : offset);
       if (res.results) {
         setData(res);
       }
@@ -52,6 +52,7 @@ export default function useData() {
   }, [page]);
   return {
     data,
+    setData,
     getData,
     changePage,
     loading,

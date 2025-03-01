@@ -9,8 +9,8 @@ import {
 import { changeType } from '@/type';
 
 interface SimplePaginationProps {
-  previous?: string | null;
-  next?: string | null;
+  previous?: string | null | boolean;
+  next?: string | null | boolean;
   handleChange: (page: changeType) => void;
 }
 

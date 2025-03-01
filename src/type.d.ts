@@ -24,6 +24,7 @@ export interface PokemonDetail {
   name: string;
   order: number;
   sprites: {
+    front_default: string
     other: {
       showdown: {
         front_default: string;
@@ -39,4 +40,24 @@ export interface PokemonItem {
   id: number;
   order: number;
   image: string;
+}
+
+/** 分类项 */
+export interface PokemonType {
+  name: string;
+  url: string;
+}
+
+export interface typePokemonItem {
+  pokemon: PokemonType[];
+  slot: number
+}
+
+/** 分类接口返回数据 */
+export interface PokemonTypeListResponse {
+  count: number;
+  next: string | null;
+  previous: string | null;
+  results: PokemonType[];
+  pokemon?:typePokemonItem[]
 }

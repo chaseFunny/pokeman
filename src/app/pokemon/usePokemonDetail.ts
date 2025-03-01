@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { toast } from 'sonner';
-import { PokemonDetail, PokemonItem, PokemonListItem } from '@/type';
 import { filterPokemonDetail } from '@/lib/utils';
+import { PokemonDetail, PokemonItem, PokemonListItem } from '@/type';
 
 /** 获取精灵详情数据 */
 export default function usePokemonData() {
