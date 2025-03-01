@@ -16,3 +16,27 @@ export type AnyIfEmpty = any;
 
 
 export type changeType = 'next' | 'previous'
+
+
+/** 精灵详情接口返回数据 */
+export interface PokemonDetail {
+  id: number;
+  name: string;
+  order: number;
+  sprites: {
+    other: {
+      showdown: {
+        front_default: string;
+      };
+    };
+  };
+}
+
+
+// 精灵详情转化数据
+export interface PokemonItem {
+  name: string;
+  id: number;
+  order: number;
+  image: string;
+}

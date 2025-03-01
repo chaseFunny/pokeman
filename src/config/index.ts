@@ -49,7 +49,7 @@ export const navLinks = [
   },
   {
     href: "/pokemon-ssr",
-    text: "客户端组件",
+    text: "服务器组件",
   },
 ];
 
