@@ -41,6 +41,6 @@ pnpm dlx shadcn@latest add button
 优化：
 - 如果 gif 图片没有办法展示，使用 png 作为兜底
 
-1) 服务器端页面开发
+5) 服务器端页面开发
 - 创建 actions ，来获取数据
 - 通过路由记录 page 和 type，交互通过路由更新参数来更新数据
