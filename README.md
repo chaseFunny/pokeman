@@ -34,3 +34,5 @@ pnpm dlx shadcn@latest add button
 
 优化：
 - 如果 gif 图片没有办法展示，使用 png 作为兜底
+
+5) 服务器端页面开发
