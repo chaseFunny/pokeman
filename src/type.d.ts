@@ -13,3 +13,6 @@ export interface PokemonListResponse {
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type AnyIfEmpty = any;
+
+
+export type changeType = 'next' | 'previous'

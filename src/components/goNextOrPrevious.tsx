@@ -1,5 +1,3 @@
-
-import { useRouter } from 'next/navigation';
 import React from "react";
 import {
   Pagination,
@@ -8,24 +6,27 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
+import { changeType } from '@/type';
 
 interface SimplePaginationProps {
   previous?: string | null;
   next?: string | null;
+  handleChange: (page: changeType) => void;
 }
 
 /** 上一页，下一页 */
 export default function GoNextOrPrevious({
   previous,
-  next
+  next,
+  handleChange
 }: Readonly<SimplePaginationProps>): React.ReactElement {
-  const router = useRouter();
+
   return (
-    <Pagination>
+    <Pagination className="cursor-pointer">
       <PaginationContent>
         <PaginationItem>
           <PaginationPrevious 
-            onClick={() => router.push(previous!)}
+            onClick={() => handleChange('previous')}
             aria-disabled={!previous} 
             className={!previous ? "pointer-events-none opacity-50" : ""}
           />
@@ -33,7 +34,7 @@ export default function GoNextOrPrevious({
         
         <PaginationItem>
           <PaginationNext 
-            onClick={() => router.push(next!)} 
+            onClick={() => handleChange('next')}
             aria-disabled={!next}
             className={!next ? "pointer-events-none opacity-50" : ""}
           />

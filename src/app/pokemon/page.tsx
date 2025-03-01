@@ -4,11 +4,14 @@ import GoNextOrPrevious from "@/components/goNextOrPrevious";
 import Welcome from "@/components/welcome";
 import useData from "./useData";
 
+
+
 const PokemonClientPage: React.FC = () => {
-  const { data, getData } = useData();
+  const { data, getData , changePage} = useData();
   useEffect(() => {
     getData();
   }, []);
+ 
   return (
     <>
       <Welcome />
@@ -16,7 +19,7 @@ const PokemonClientPage: React.FC = () => {
         total count: {data?.count}
       </div>
       <div className="flex justify-center">
-        <GoNextOrPrevious next={data?.next} previous={data.previous} />
+        <GoNextOrPrevious handleChange={changePage} next={data?.next} previous={data?.previous} />
       </div>
     </>
   );
