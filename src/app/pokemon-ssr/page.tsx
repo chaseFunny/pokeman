@@ -46,7 +46,7 @@ export default async function PokemonPage({
   const total = isType ? commonData?.length : data?.count
   return (
     <div>
-      <Welcome />
+      <Welcome text="- 服务器组件" /> 
       <div className="my-4 text-center text-gray-400">
         total count: {total}，current page: {page}
       </div>

@@ -38,7 +38,7 @@ const PokemonClientPage: React.FC = () => {
 
   return (
     <>
-      <Welcome />
+      <Welcome text="- 客户端组件" />
       { dataLoading || loading ? <Loading /> :<div className="my-4 text-center text-gray-400">
         total count: {data?.count}，current page: {page}
       </div>}
