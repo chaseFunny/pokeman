@@ -54,7 +54,7 @@ export default function useType() {
     const typeIndex = currentTypes.indexOf(type);
     
     let newTypes: string[];
-    if (!typeIndex || typeIndex === -1) {
+    if ( typeIndex === -1) {
       // 如果不存在，添加此type
       newTypes = [...currentTypes, type];
     } else {
