@@ -28,7 +28,10 @@ export default function GoNextOrPreviousServer({
   
   const buildPageUrl = (newPage: number) => {
     const baseUrl = '/pokemon-ssr';
-    const typeParam = type ? `&type=${type.join(',')}` : '';
+
+    const formatType = typeof type === 'string'  ? [] : type.filter(ele => !!ele);
+    const typeParam = formatType.length > 0 ? `&type=${type.join(',')}` : '';
+        console.log(typeParam, ';type');
     return `${baseUrl}?page=${newPage === 1 ? (newPage + 1) : newPage}${typeParam}`;
   };
   return (

@@ -45,16 +45,16 @@ export function findCommonPokemon(typePokemonArrays: typePokemonItem[][]): numbe
   
   // 如果只有一个类型，直接返回该类型的所有精灵
   if (typePokemonArrays.length === 1) {
-    const arr = typePokemonArrays[0].flatMap(item => item.pokemon)
+    const arr = typePokemonArrays[0]?.flatMap(item => item.pokemon)
     return arr.map(pokemon => extractPokemonIdFromUrl(pokemon.url)).filter(id => id !== -1);
   }
   
   // 提取第一个类型的所有精灵作为初始集合
-  let commonPokemon = typePokemonArrays[0].flatMap(item => item.pokemon);
+  let commonPokemon = typePokemonArrays[0]?.flatMap(item => item.pokemon);
   
   // 依次与其他类型求交集
   for (let i = 1; i < typePokemonArrays.length; i++) {
-    const currentTypePokemons = typePokemonArrays[i].flatMap(item => item.pokemon);
+    const currentTypePokemons = typePokemonArrays[i]?.flatMap(item => item.pokemon);
     
     // 根据name属性求交集
     commonPokemon = commonPokemon.filter(pokemon => 

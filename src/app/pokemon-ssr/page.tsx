@@ -30,14 +30,14 @@ export default async function PokemonPage({
   const { data: typeData, error:typeError } = await getTypeListAction()
    
   const { data: detailData, error: detailError } = await getPokemonDetailListAction(data?.results)
-  const isType = type.length > 0
-  let commonData
+  const isType = type.filter(ele => !!ele).length > 0
+  let commonData: number[] = []
   let commonError
   let typePokemonData
   let typePokemonError
   if (isType) {
     const { data: cData, error: cErr } = await getCommonPokemonAction(type)
-    commonData = cData
+    commonData = cData ?? []
     commonError = cErr
     const start = page > 1 ? (page - 1) * DEFAULT_PAGE_LIMIT : DEFAULT_PAGE_OFFSET
     const end = start + DEFAULT_PAGE_LIMIT
@@ -47,13 +47,13 @@ export default async function PokemonPage({
   }
   
   const renderData= isType? typePokemonData : detailData
-
+  const total = isType ? commonData?.length : data?.count
   return (
     <div>
       <TypeSelectorServer page={page}  types={typeData}  selectedTypes={type} />
       {(detailData || typePokemonData) && <PokemonList pokemonList={renderData} />}
         <div className="flex justify-center">
-        <GoNextOrPreviousServer page={page}  total={renderData?.length ?? 0} type={type}  />
+        <GoNextOrPreviousServer page={page}  total={total ?? 0} type={type}  />
       </div>
       {typeError?.message && <div>{typeError.message}</div>}
       {error?.message && <div>{error.message}</div>}
