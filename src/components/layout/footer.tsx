@@ -1,7 +1,9 @@
 // src/components/layout/footer.tsx
-import React from "react";
-import { TypeSocialLink, siteConfig, socialLinks } from "@/config";
 import Link from "next/link";
+import React from "react";
+
+
+import { TypeSocialLink, siteConfig, socialLinks } from "@/config";
 
 const Footer: React.FC = () => {
   return (

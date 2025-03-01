@@ -44,11 +44,11 @@ export const siteDefaultMetaConfig: Metadata = {
 
 export const navLinks = [
   {
-    href: "/pokeman",
+    href: "/pokemon",
     text: "客户端组件",
   },
   {
-    href: "/pokeman-ssr",
+    href: "/pokemon-ssr",
     text: "客户端组件",
   },
 ];

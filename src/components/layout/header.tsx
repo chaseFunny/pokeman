@@ -1,9 +1,12 @@
 "use client";
 // src/components/layout/header.tsx
-import React, { useState } from "react"; // 引入 useState
-import { navLinks, siteConfig } from "@/config";
-import Link from "next/link";
 import { Menu } from "lucide-react"; // 引入 Menu 图标
+import Link from "next/link";
+import React, { useState } from "react"; // 引入 useState
+
+
+
+import { navLinks, siteConfig } from "@/config";
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false); // 初始化菜单状态为收起
