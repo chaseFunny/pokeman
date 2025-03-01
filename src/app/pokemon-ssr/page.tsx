@@ -6,15 +6,12 @@ import GoNextOrPreviousServer from "@/components/goNextOrPreviousServer";
 import TypeSelectorServer from "@/components/typeSelectServer";
 import { DEFAULT_PAGE_LIMIT, DEFAULT_PAGE_OFFSET } from "@/constants";
 
-
-
-
 /** 服务端页面 */
 export default async function PokemonPage({
   searchParams
-}: Readonly<{
-  searchParams: { [key: string]: string | string[] | undefined }
-}>) {
+}: {
+  searchParams:Promise< { [key: string]: string | string[] | undefined }>
+}) {
   const params= await searchParams
 
   const page = Number(params.page ?? 0)

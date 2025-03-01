@@ -1,6 +1,6 @@
 
-import { PokemonCard } from "./pokemonItemCard";
 import { PokemonItem } from "@/type";
+import { PokemonCard } from "./pokemonItemCard";
 
 interface PokemonListProps {
   pokemonList?: PokemonItem[];

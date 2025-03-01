@@ -1,8 +1,8 @@
 'use client'
 import { useSearchParams, useRouter } from "next/navigation";
 import React from "react";
-import TypeSelector from "./typeSelect";
 import { PokemonType } from "@/type";
+import TypeSelector from "./typeSelect";
 
 interface TypeSelectorProps {
   page?: number;
