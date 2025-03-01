@@ -7,40 +7,43 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
+import { DEFAULT_PAGE_LIMIT } from "@/constants";
 
 interface SimplePaginationProps {
   page: number;
-  type: string | string[];
+  type?:  string[];
   total: number;
 }
 
 /** 上一页，下一页 */
 export default function GoNextOrPreviousServer({
-  page,
-  type,
+  page = 1,
+  type =[],
   total
 }: Readonly<SimplePaginationProps>): React.ReactElement {
-  const limit = 20;
-  const totalPages = Math.ceil(total / limit);
+
+  const totalPages = Math.ceil(total / DEFAULT_PAGE_LIMIT);
   const hasPrevious = page > 1;
   const hasNext = page < totalPages;
-
+  
   const buildPageUrl = (newPage: number) => {
-    const baseUrl = '/pokemon';
-    const typeParam = type ? `&types=${type}` : '';
-    return `${baseUrl}?page=${newPage}${typeParam}`;
+    const baseUrl = '/pokemon-ssr';
+    const typeParam = type ? `&type=${type.join(',')}` : '';
+    return `${baseUrl}?page=${newPage === 1 ? (newPage + 1) : newPage}${typeParam}`;
   };
-
   return (
     <Pagination className="cursor-pointer">
       <PaginationContent>
         <PaginationItem>
           {hasPrevious ? (
-            <Link href={buildPageUrl(page - 1)}>
-              <PaginationPrevious 
-                aria-disabled={!hasPrevious}
-                className={!hasPrevious ? "pointer-events-none opacity-50" : ""}
-              />
+            <Link href={buildPageUrl(page - 1)} >
+              <div>
+                <PaginationPrevious 
+                    aria-disabled={!hasPrevious}
+                    className={!hasPrevious ? "pointer-events-none opacity-50" : ""}
+                  />
+              </div>
+          
             </Link>
           ) : (
             <PaginationPrevious 
@@ -52,11 +55,13 @@ export default function GoNextOrPreviousServer({
         
         <PaginationItem>
           {hasNext ? (
-            <Link href={buildPageUrl(page + 1)}>
-              <PaginationNext 
-                aria-disabled={!hasNext}
-                className={!hasNext ? "pointer-events-none opacity-50" : ""}
-              />
+            <Link href={buildPageUrl(page + 1)} >
+              <div>
+                <PaginationNext 
+                  aria-disabled={!hasNext}
+                  className={!hasNext ? "pointer-events-none opacity-50" : ""}
+                />
+              </div>
             </Link>
           ) : (
             <PaginationNext 

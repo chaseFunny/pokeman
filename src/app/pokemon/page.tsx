@@ -47,7 +47,7 @@ const PokemonClientPage: React.FC = () => {
           <Loading /> :
           <TypeSelector onTypeToggle={typeToggle}  types={typeList}  selectedTypes={getTypeArrayFromUrl(searchParams)} />
       }
-      {detailsList && <PokemonList pokemonList={isType ? pokemonDetailList : detailsList} isLoading={loading || dataLoading} />}
+      {(detailsList || pokemonDetailList) && <PokemonList pokemonList={isType ? pokemonDetailList : detailsList} isLoading={loading || dataLoading} />}
       <div className="flex justify-center">
         <GoNextOrPrevious handleChange={changePage} next={isType ? canNext  : data?.next} previous={isType ? canPrev  :data?.previous} />
       </div>

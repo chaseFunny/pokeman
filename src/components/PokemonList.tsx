@@ -3,7 +3,7 @@ import { PokemonCard } from "./pokemonItemCard";
 import { PokemonItem } from "@/type";
 
 interface PokemonListProps {
-  pokemonList: PokemonItem[];
+  pokemonList?: PokemonItem[];
   isLoading?: boolean;
 }
 
@@ -14,7 +14,7 @@ export function PokemonList({ pokemonList, isLoading = false }: Readonly<Pokemon
 
   return (
     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 p-4">
-      {pokemonList.map((pokemon) => (
+      {pokemonList?.map((pokemon) => (
         <PokemonCard key={pokemon.id} pokemon={pokemon} />
       ))}
     </div>

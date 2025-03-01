@@ -1,9 +1,13 @@
 'use server'
 
-import { getPokemonDetailListAction, getPokemonListAction } from "./actions";
+import { getCommonPokemonAction, getPokemonByIdAction, getPokemonDetailListAction, getPokemonListAction, getTypeListAction } from "./actions";
 import { PokemonList } from "@/components/PokemonList";
 import GoNextOrPreviousServer from "@/components/goNextOrPreviousServer";
+import TypeSelectorServer from "@/components/typeSelectServer";
 import { DEFAULT_PAGE_LIMIT, DEFAULT_PAGE_OFFSET } from "@/constants";
+
+
+
 
 /** 服务端页面 */
 export default async function PokemonPage({
@@ -12,28 +16,49 @@ export default async function PokemonPage({
   searchParams: { [key: string]: string | string[] | undefined }
 }>) {
   const params= await searchParams
-  console.log(params, 123);
+
   const page = Number(params.page ?? 0)
-  const type = params.type
+  const type = [...(new Set(typeof params.type === 'string' ? params.type.split(',') : params.type))]
+  
   const { data, error } = await getPokemonListAction(DEFAULT_PAGE_LIMIT, page > 1 ? (page - 1) * DEFAULT_PAGE_LIMIT : DEFAULT_PAGE_OFFSET)
   if (error) {
     return (
       <div>{error.message}</div>
     );
   }
+
+  const { data: typeData, error:typeError } = await getTypeListAction()
+   
   const { data: detailData, error: detailError } = await getPokemonDetailListAction(data?.results)
-  console.log(detailData, detailError);
-    if (detailError) {
-    return (
-      <div>{detailError.message}</div>
-    );
+  const isType = type.length > 0
+  let commonData
+  let commonError
+  let typePokemonData
+  let typePokemonError
+  if (isType) {
+    const { data: cData, error: cErr } = await getCommonPokemonAction(type)
+    commonData = cData
+    commonError = cErr
+    const start = page > 1 ? (page - 1) * DEFAULT_PAGE_LIMIT : DEFAULT_PAGE_OFFSET
+    const end = start + DEFAULT_PAGE_LIMIT
+    const { data: idsData, error: idsErr } = await getPokemonByIdAction((commonData ?? []).slice(start, end))
+    typePokemonData = idsData
+    typePokemonError = idsErr
   }
+  
+  const renderData= isType? typePokemonData : detailData
+
   return (
     <div>
-      {detailData && <PokemonList pokemonList={detailData} />}
-       <div className="flex justify-center">
-        <GoNextOrPreviousServer page={page}  total={data?.count ?? 0} type={type}  />
+      <TypeSelectorServer page={page}  types={typeData}  selectedTypes={type} />
+      {(detailData || typePokemonData) && <PokemonList pokemonList={renderData} />}
+        <div className="flex justify-center">
+        <GoNextOrPreviousServer page={page}  total={renderData?.length ?? 0} type={type}  />
       </div>
+      {error?.message && <div>{error.message}</div>}
+      {detailError?.message && <div>{detailError.message}</div>}
+      {typePokemonError?.message && <div>{typePokemonError.message}</div>}
+      {commonError?.message && <div>{commonError.message}</div>}
     </div>
   );
 }
