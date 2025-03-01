@@ -127,3 +127,7 @@
     @apply bg-background text-foreground;
   }
 }
+
+.index-main-box {
+  min-height: calc(100vh - 257px);
+}
