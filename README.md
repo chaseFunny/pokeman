@@ -6,7 +6,7 @@
 - react
 - next.js
 - tailwind css
-- shadui/cn
+- shadcn/ui
 
 ## 开发
 
@@ -19,7 +19,7 @@ npx create-next-app@latest
 ```
 然后使用 pnpm 作为包管理工具
 
-2）引入 shadui/cn， 添加 button 组件，验证是否引入成功
+2）引入 shadcn/ui， 添加 button 组件，验证是否引入成功
 
 ```bash
 pnpm dlx shadcn@latest init
